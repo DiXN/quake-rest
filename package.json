@@ -1,0 +1,22 @@
+{
+  "name": "quake-rest",
+  "version": "1.0.0",
+  "description": "RESTful service for id Tech 3 based games",
+  "main": "server.js",
+  "scripts": {
+    "start": "node ./server.js",
+    "test": "jest",
+    "coverage": "\"npm run test -- --coverage\"",
+    "test-watch": "nodemon -x \"npm test test\"",
+    "watch": "nodemon --inspect ./server.js"
+  },
+  "author": "DiXN",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.0",
+    "jest": "^21.2.1",
+    "superagent": "^3.6.2",
+    "supertest": "^3.0.0"
+  }
+}
