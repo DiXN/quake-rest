@@ -27,6 +27,15 @@ describe('Test IP validity', () => {
   })
 })
 
+describe('Test timeout', () => {
+  test('89.163.251.169:19607 should timeout since it is an unsupported IP', () => {
+    return request(app)
+    .get('/ip/89.163.251.169:19607').expect(200).then(res => {
+      expect(res.body.status).toBe('DOWN')
+    })
+  })
+})
+
 describe('Test Content-Type json', () => {
   test('if IP is valid, Content-Type should be JSON', (done) => {
     return request(app)

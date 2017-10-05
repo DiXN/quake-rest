@@ -22,12 +22,15 @@ app.get('/ip/:ip', (req, res) => {
   const message = new Buffer('\xFF\xFF\xFF\xFFgetstatus\x00'.split('').map((x) => x.charCodeAt(0)))
   var hasMessage = false
 
-  setTimeout(() => {
-    if (!hasMessage) {
-      res.setHeader('Content-Type', 'application/json')
-      res.status(200).send(JSON.stringify({ ip: req.body.ip, status: 'DOWN'}))
-    }
-  }, 750)
+  client.on('listening', () => {
+    setTimeout(() => {
+      if (!hasMessage) {
+        res.setHeader('Content-Type', 'application/json')
+        res.status(200).send(JSON.stringify({ ip: req.params.ip, status: 'DOWN'}))
+        client.close()
+      }
+    }, 750)
+  })
 
   client.on('error', (err) => {
     console.log(`socket error:\n${err.stack}`)
@@ -73,12 +76,7 @@ app.get('/ip/:ip', (req, res) => {
     client.close()
   })
 
-  client.send(message, 0, message.length, Number(server.port), server.ip, (err) => {
-    if (err) {
-      console.log(`socket error:\n${err.stack}`)
-      client.close()
-    }           
-  })
+  client.send(message, 0, message.length, Number(server.port), server.ip)
 })
 
 module.exports = app
