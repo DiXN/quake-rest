@@ -61,7 +61,8 @@ app.get('/ip/:ip', (req, res) => {
     })
 
     serverProperties[entry.key] = entry.value.split('\n')[0]
-    serverProperties.sv_maxclients = (Number(serverProperties.sv_maxclients) - Number(serverProperties.sv_privateClients)).toString()
+    serverProperties.sv_maxclients = serverProperties.sv_privateClients ? (
+      Number(serverProperties.sv_maxclients) - Number(serverProperties.sv_privateClients)).toString() : serverProperties.sv_maxclients
 
     if (isPretty) {
       res.status(200).send(`<pre style='word-wrap: break-word; white-space: pre-wrap;'>${
