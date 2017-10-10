@@ -2,10 +2,12 @@ const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
 const dgram = require('dgram')
+const cors = require('cors')
 
 app.use(express.static(__dirname))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
+app.use(cors())
 
 app.get('/ip/:ip', (req, res) => {
   if (!req.params.ip.match('^.*:[0-9]{3,5}$')) {
