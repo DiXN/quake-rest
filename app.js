@@ -68,12 +68,18 @@ app.get('/ip/:ip', (req, res) => {
 
     if (isPretty) {
       res.status(200).send(`<pre style='word-wrap: break-word; white-space: pre-wrap;'>${
-      	JSON.stringify({...serverProperties, ...{ status: 'UP', numplayers: players.length.toString(), 
-      		list_of_players: players.filter((x) => x !== '') }}, null, 2)}</pre>`)
+      	JSON.stringify({
+          ...serverProperties,
+          ...{ status: 'UP', numplayers: players.length.toString(),
+          list_of_players: players.filter((x) => x !== '') }}, null, 2)}
+        </pre>`)
     } else {
       res.setHeader('Content-Type', 'application/json')
-      res.status(200).send(JSON.stringify({...serverProperties, 
-      	...{ status: 'UP', numplayers: players.length.toString(), list_of_players: players.filter((x) => x !== '') }}))
+      res.status(200).send(JSON.stringify({
+          ...serverProperties,
+          ...{ status: 'UP', numplayers: players.length.toString(), list_of_players: players.filter((x) => x !== '') }
+        }
+      ))
     }
 
     client.close()
