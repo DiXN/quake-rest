@@ -13,14 +13,14 @@
   "author": "DiXN",
   "license": "ISC",
   "dependencies": {
-    "body-parser": "^1.18.2",
-    "cors": "^2.8.4",
-    "express": "^4.16.0",
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
     "jest": "^21.2.1",
-    "superagent": "^3.6.2",
-    "supertest": "^3.0.0"
+    "superagent": "^3.8.3",
+    "supertest": "^3.3.0"
   },
   "devDependencies": {
-    "coveralls": "^3.0.0"
+    "coveralls": "^3.0.2"
   }
 }
