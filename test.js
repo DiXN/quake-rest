@@ -2,9 +2,16 @@ const request = require('supertest')
 const app = require('./app')
 
 describe('Test the root path', () => {
-  test('access to root path is invalid and should return 404', () => {
-    return request(app).get('/').then(res => {
-      expect(res.statusCode).toBe(404)
+  test('access to root path with invalid server should return 500', () => {
+    return request(app).get('/?server=').then(res => {
+      expect(res.statusCode).toBe(500)
+    })
+  })
+
+  test('access to root path with multiple servers should return 200', () => {
+    return request(app).get('/?server=87.118.125.187:28971;92.222.75.18:28964').then(res => {
+      expect(res.statusCode).toBe(200)
+      expect(res.body).toHaveLength(2)
     })
   })
 })
